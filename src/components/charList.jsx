@@ -7,15 +7,24 @@ import CharBox from './characterBox';
 class CharList extends React.Component {
     constructor(props){
         super(props)
-        console.log(this.props.click);
+        this.state = {
+            //char to pass to gameWindow to update word
+            char: ''
+        };
     }
-    
+    modifyMessage= (boxChar) => {
+        this.setState({char: boxChar});//sets state of this component
+        //sends char to GameWindow, signals to add char to word
+        this.props.parentCallback(boxChar);
+    }
     render() { 
-        const data = ["a","b","c"];
-        const listItems = data.map((d) => <CharBox char = {d} onClick = {this.props.click}/>);
-        //console.log(listItems);
+        const listItems = this.props.chars.map((d) => <
+            CharBox char = {d} 
+            parentCallback = {this.modifyMessage}
+            />);
         return (
         <div className = "flexRow">
+            <h1> {this.state.char} </h1>
             {listItems}
         </div>
         );
