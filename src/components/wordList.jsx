@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WordBox from './wordBox';
+
 class WordList extends Component {
     constructor(props) {
         super(props);
@@ -7,11 +8,11 @@ class WordList extends Component {
     }
     render() { 
         const listItems = this.props.wordChars.map((d) => <
-        WordBox char = {d} 
+        WordBox 
+        char = {d} 
         />);
         return ( 
         <div className='flexRow'>
-            
             {listItems}
         </div>
          );

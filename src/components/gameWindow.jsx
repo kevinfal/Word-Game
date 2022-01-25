@@ -10,8 +10,9 @@ class GameWindow extends Component {
             char: '',
             boxChars: ['来','不','及'], //list of chars to use
             charKeys: [], //key for each char, counts up to length
-            CharsVisible: [true, true, true], //determines which chars are visible in charBox
+            charsVisible: [true, true, true], //determines which chars are visible in charBox
             wordChars: []
+            
         };
         this.makeCharKeys(); //construct charKeys
         console.log(this.state.charKeys);
@@ -23,9 +24,9 @@ class GameWindow extends Component {
         }
     }
 
-    addWordChar= (data) => {
-            this.setState({char: data});
-            this.state.wordChars.push(data);
+    addWordChar= (arr) => {
+            this.setState({char: arr[0]});
+            this.state.wordChars.push(arr[0]);
             //alert(this.state.wordChars);
     }
     render() { 
@@ -35,7 +36,9 @@ class GameWindow extends Component {
             <CharList 
             chars = {this.state.boxChars}
             parentCallback = {this.addWordChar}
-            keys = {this.state.charKeys}/>
+            keys = {this.state.charKeys}
+            charsVisible = {this.state.charsVisible}
+            />
             <h2>{this.state.char}</h2>
             <button> reroll </button>
             <div>
