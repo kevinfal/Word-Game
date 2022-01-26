@@ -11,10 +11,8 @@ class CharList extends React.Component {
             //char to pass to gameWindow to update word
             char: '',
             index: 0, // used to get the char, key, and visibility from props
-            charBoxes: [], //holds visible boxes
-            invisible: [], //holds invisible boxes
        };
-       this.state.charBoxes = this.makeCharBoxList();
+       //this.state.charBoxes = this.makeCharBoxList();
     }
     /**
      * Handles click from charBox
@@ -23,36 +21,28 @@ class CharList extends React.Component {
      * @param {*char, int key} arr 
      */
     modifyMessage= (arr) => {
-        this.setState({char: arr[0]});//sets state of this component
-        
-        const clicked = this.state.charBoxes.filter((box) => box.props.id == arr[1]);
-        const newList = this.state.charBoxes.filter((box) => box.props.id != arr[1]);
-        this.state.charBoxes = newList
+        this.setState({char: arr[0]});//sets char, for debugging
 
         //sends array to GameWindow, signals to add char to word
         this.props.parentCallback(arr);
     }
-    makeCharBoxList(){
-        const listItems = [];
-        for(var i = 0; i < this.props.chars.length; i++){
-            listItems.push(
-                <CharBox
-                char = {this.props.chars[i]}
-                key = {this.props.keys[i]}
-                id = {this.props.keys[i]}
-                parentCallback = {this.modifyMessage}
-                />
-            )
-        }
-        // const listItems = this.props.chars.map((d) => <
-        // CharBox char = {d} 
-        // parentCallback = {this.modifyMessage}
-        //
-        // />);
-        return listItems;
-    }
+    // makeCharBoxList(){
+    //     const listItems = [];
+    //     for(var i = 0; i < this.props.chars.length; i++){
+    //         listItems.push(
+    //             <CharBox
+    //             char = {this.props.chars[i]}
+    //             key = {this.props.keys[i]}
+    //             id = {this.props.keys[i]}
+    //             parentCallback = {this.modifyMessage}
+    //             />
+    //         )
+    //     }
+
+    //     return listItems;
+    // }
     render() { 
-        const listItems = this.state.charBoxes;
+        const listItems = this.props.charBoxes;
         return (
         <div className = "flexRow">
             <h1> {this.state.char} </h1>

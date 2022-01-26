@@ -6,38 +6,89 @@ import WordList from './wordList';
 class GameWindow extends Component {
     constructor(props) {
         super(props);
+        this.makeCharBoxList = this.makeCharBoxList.bind(this);
+        this.makeCharKeys = this.makeCharKeys.bind(this);
+        this.addWordChar = this.addWordChar.bind(this);
         this.state = { 
-            char: '',
-            boxChars: ['来','不','及'], //list of chars to use
-            charKeys: [], //key for each char, counts up to length
-            charsVisible: [true, true, true], //determines which chars are visible in charBox
-            wordChars: []
-            
+            char: '', //this is for debugging
+            chars: ['来','不','及'], //list of chars to use
+            keys: [], //key for each char, counts up to length
+            invisible: [true, true, true], //determines which chars are visible in charBox
+            charBoxes: [], //holds visible boxes
+            invisible: [], //holds invisible boxes
+            wordChars: [], //replace later
+
         };
-        this.makeCharKeys(); //construct charKeys
-        console.log(this.state.charKeys);
-    }
+        this.state.keys = this.makeCharKeys();
+        this.state.charBoxes = this.makeCharBoxList();
 
+        this.setState({charBoxes: this.makeCharBoxList()});
+        //alert(this.state.keys);
+        //this.state.keys =  //construct charKeys
+        //this.state.charBoxes = this.makeCharBoxList();
+        //console.log(this.state.charKeys);
+    }
+    /**
+     * Makes list of keys to assign to the CharBoxes in state
+     * Only used in constructor
+     */
     makeCharKeys(){
-        for(var i = 0; i <this.state.boxChars.length; i++){
-            this.state.charKeys.push(i);
+        const returned = [];
+        for(var i = 0; i <this.state.chars.length; i++){
+            returned.push(i);
         }
+        //alert(returned);
+        return returned;
     }
+    
+    makeCharBoxList(){
+        const listItems = [];
+        for(var i = 0; i < this.state.chars.length; i++){
+            listItems.push(
+                <CharBox
+                char = {this.state.chars[i]}
+                key = {this.state.keys[i]}
+                id = {this.state.keys[i]}
+                parentCallback = {this.addWordChar}
+                />
+            )
+        
+        }
+        // const listItems = this.props.chars.map((d) => <
+        // CharBox char = {d} 
+        // parentCallback = {this.modifyMessage}
+        //
+        // />);
+        return listItems;
+    }
+    /**
+     * Parent callback from charList
+     * @param {*array} arr [char, int id]
+     */
+    addWordChar = (arr) => {
+            const clicked = this.state.charBoxes.filter((box) => box.props.id === arr[1]);
+            this.state.invisible.push(clicked);
+            //
+            const newList = this.state.charBoxes.filter((box) => box.props.id !== arr[1]);
+            this.state.charBoxes = newList;
 
-    addWordChar= (arr) => {
-            this.setState({char: arr[0]});
+            this.setState({char: arr[0]}); //sets char, for debugging
             this.state.wordChars.push(arr[0]);
             //alert(this.state.wordChars);
     }
+    removeWordChar = (arr) => {
+        
+    }
+    //
     render() { 
         return ( 
         <div>
             <button> start </button>
             <CharList 
-            chars = {this.state.boxChars}
+            charBoxes = {this.state.charBoxes}
+            chars = {this.state.ch}
             parentCallback = {this.addWordChar}
-            keys = {this.state.charKeys}
-            charsVisible = {this.state.charsVisible}
+            keys = {this.state.keys}
             />
             <h2>{this.state.char}</h2>
             <button> reroll </button>
