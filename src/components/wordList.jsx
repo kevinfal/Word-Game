@@ -4,16 +4,18 @@ import WordBox from './wordBox';
 class WordList extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            car: '',
+        }
     }
     render() { 
-        const listItems = this.props.wordChars.map((d) => <
-        WordBox 
-        char = {d} 
-        />);
+        // const listItems = this.props.wordChars.map((d) => <
+        // WordBox 
+        // char = {d} 
+        // />);
         return ( 
         <div className='flexRow'>
-            {listItems}
+            {this.props.wordBoxes}
         </div>
          );
     }

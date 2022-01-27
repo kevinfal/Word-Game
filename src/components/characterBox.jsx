@@ -16,6 +16,7 @@ class CharBox extends React.Component {
             );
     };
     render() { 
+
         return (
         <div>
              <div className = "rectangle" onClick = {this.handleClick}>
