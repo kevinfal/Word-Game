@@ -24,12 +24,9 @@ class GameWindow extends Component {
         };
         this.state.keys = this.makeCharKeys();
         this.state.charBoxes = this.makeCharBoxList();
-        this.state.wordBoxes = this.makeWordBoxList();
+        this.state.invisibleWord = this.makeWordBoxList(); //switch from wordBoxes to invisibleWord for testing
         this.setState({charBoxes: this.makeCharBoxList()});
-        //alert(this.state.keys);
-        //this.state.keys =  //construct charKeys
-        //this.state.charBoxes = this.makeCharBoxList();
-        //console.log(this.state.charKeys);
+
     }
     /**
      * Makes list of keys to assign to the CharBoxes in state
@@ -57,11 +54,6 @@ class GameWindow extends Component {
             )
         
         }
-        // const listItems = this.props.chars.map((d) => <
-        // CharBox char = {d} 
-        // parentCallback = {this.modifyMessage}
-        //
-        // />);
         return listItems;
     }
 
@@ -86,30 +78,46 @@ class GameWindow extends Component {
      * @param {*array} arr [char, int id]
      */
     addWordChar = (arr) => {
+
             //get the box that was clicked
             const clicked = this.state.charBoxes.filter((box) => box.props.id === arr[1]);
+            //push it to invisibleChars
             this.state.invisibleChar.push(clicked);
-            //
+            //remove from visible boxes
             const newList = this.state.charBoxes.filter((box) => box.props.id !== arr[1]);
             this.state.charBoxes = newList;
+
+            //get wordBox with same ID from invisibleWord
+            const invisibleBox =  this.state.invisibleWord.filter((box) => box.props.id === arr[1]);
+            //add invisible to wordBoxes
+            this.state.wordBoxes.push(invisibleBox);
+            //remove from invisible
+            const newList2 = this.state.invisibleWord.filter((box) => box.props.id !== arr[1]);
+            this.state.invisibleWord = newList2;
 
             this.setState({char: arr[0]}); //sets char, for debugging
             this.state.wordChars.push(arr[0]); //this is also for debugging
             //alert(this.state.wordChars);
     }
     removeWordChar = (arr) => {
-            //alert("hapen");
+            //get the wordBox that was clicke
+            
             const clicked = this.state.wordBoxes.filter((box) => box.props.id === arr[1]);
-            console.log(clicked);
             this.state.invisibleWord.push(clicked);
-            console.log(this.state.invisibleWord);
+
             //get rid of box that was clicked from wordList
             const newList = this.state.wordBoxes.filter((box) => box.props.id !== arr[1]);
             this.state.wordBoxes = newList;
 
+            //get CharBox with same ID from invisibleChar
+            const invisibleCharBox = this.state.invisibleChar.filter((box) => box.props.id === arr[1]);
+            //move from invisible to CharBoxes
+            this.state.charBoxes.push(invisibleCharBox);
+
+
             //this.setState({char: arr[0]}); //sets char, for debugging
-            this.setState({char: arr[0]});
-            this.state.wordChars.push(arr[0]);
+            this.setState({char: arr[0]});//this is the key to updating the boxes
+            this.state.wordChars.push(arr[0]); //this is also for debugging
     }
     //
     render() { 
@@ -134,5 +142,10 @@ class GameWindow extends Component {
     }
 }
 
+/**
+ * in the future
+ * switch from passing around an object to passing
+ * around the ID to the object
+ */
  
 export default GameWindow;

@@ -11,6 +11,7 @@ class CharBox extends React.Component {
         //console.log(this.props);
     }
     handleClick = (e) => {
+        console.log(this.props);
         this.props.parentCallback(
             [this.props.char,this.props.id]
             );
