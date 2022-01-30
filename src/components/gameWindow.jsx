@@ -7,7 +7,6 @@ import WordList from './wordList';
 class GameWindow extends Component {
     constructor(props) {
         super(props);
-        this.makeCharBoxList = this.makeCharBoxList.bind(this);
         this.makeCharKeys = this.makeCharKeys.bind(this);
         this.addWordChar = this.addWordChar.bind(this);
         this.makeIds = this.makeIds.bind(this);
@@ -16,12 +15,8 @@ class GameWindow extends Component {
             ids: {}, //dict for id #: char
             charListIds: [],
             wordListIds: [],
-
-            wordChar: '', //this is also for debugging
             chars: ['来','不','及'], //list of chars to use
             keys: [], //key for each char, counts up to length
-            charBoxes: [], //holds visible boxes
-
         };
         //todo: getchars from some list
         this.makeIds();
@@ -72,41 +67,7 @@ class GameWindow extends Component {
         for(var i = 0; i <this.state.chars.length; i++){
             returned.push(i);
         }
-        //alert(returned);
         return returned;
-    }
-    
-    makeCharBoxList(){
-        const listItems = [];
-        for(var i = 0; i < this.state.chars.length; i++){
-            listItems.push(
-                <CharBox
-                char = {this.state.chars[i]}
-                key = {this.state.keys[i]}
-                id = {this.state.keys[i]}
-                parentCallback = {this.addWordChar}
-                />
-            )
-        
-        }
-        return listItems;
-    }
-
-    makeWordBoxList(){
-        const listItems = [];
-        for(var i = 0; i < this.state.chars.length; i++){
-            listItems.push(
-                <CharBox
-                char = {this.state.chars[i]}
-                key = {this.state.keys[i]}
-                id = {this.state.keys[i]}
-                parentCallback = {this.removeWordChar}
-                />
-            )
-        
-        }
-
-        return listItems;
     }
     /**
      * Parent callback from charList
@@ -147,11 +108,4 @@ class GameWindow extends Component {
          );
     }
 }
-
-/**
- * in the future
- * switch from passing around an object to passing
- * around the ID to the object
- */
- 
 export default GameWindow;
