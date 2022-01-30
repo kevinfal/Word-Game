@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import CharBox from './characterBox';
 /**
  * Contains all of CharBoxes that are used to construct
  * words in the game
  */
-class CharList extends React.Component {
+class CharList extends Component {
     constructor(props){
         super(props)
         this.state = {

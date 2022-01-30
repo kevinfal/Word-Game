@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-
 /**
  * Basic Box with character within it
  * On Click add character to word
  */
-class CharBox extends React.Component {
-    constructor(props){
-        super(props);
-        //this.handleClick = this.handleClick.bind(this);
-        //console.log(this.props);
-    }
+class CharBox extends Component {
     handleClick = (e) => {
         console.log(this.props);
         this.props.parentCallback(
@@ -17,7 +11,6 @@ class CharBox extends React.Component {
             );
     };
     render() { 
-
         return (
         <div>
              <div className = "rectangle" onClick = {this.handleClick}>

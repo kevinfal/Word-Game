@@ -17,27 +17,16 @@ class GameWindow extends Component {
             charListIds: [],
             wordListIds: [],
 
-            char: '', //this is for debugging
             wordChar: '', //this is also for debugging
             chars: ['来','不','及'], //list of chars to use
             keys: [], //key for each char, counts up to length
             charBoxes: [], //holds visible boxes
-            invisibleChar: [], //holds invisible boxes
-            invisibleWord: [], //holds invisible wordChars
-            wordBoxes: [], //replace later
-            wordChars: [], //this is for debug
 
         };
         //todo: getchars from some list
         this.makeIds();
-
-
         //replace later
-        this.state.keys = this.makeCharKeys();
-        //this.state.charBoxes = this.makeCharBoxList();
-        this.state.invisibleWord = this.makeWordBoxList(); //switch from wordBoxes to invisibleWord for testing
-        this.setState({charBoxes: this.makeCharBoxList()});
-
+        this.setState({keys: this.makeCharKeys()});
     }
 
     /**
