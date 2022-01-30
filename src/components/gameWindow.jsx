@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import CharBox from './characterBox';
 import CharList from './charList';
-import WordBox from './wordBox';
 import WordList from './wordList';
 
-/*
-    todo: 
-        -render boxes from id
-        -on click remove id from char/wordbox 
-            to other array
-        -update state, re-render
 
-
-*/
 class GameWindow extends Component {
     constructor(props) {
         super(props);
@@ -134,55 +125,17 @@ class GameWindow extends Component {
      */
     addWordChar = (arr) => {
             this.state.wordListIds.push(arr[1]);
-
             this.setState({charListIds: this.state.charListIds.filter((id) =>  id !== arr[1])})
-
-            // //get the box that was clicked
-            // const clicked = this.state.charBoxes.filter((box) => box.props.id === arr[1]);
-            // //push it to invisibleChars
-            // this.state.invisibleChar.push(clicked);
-            // //remove from visible boxes
-            // const newList = this.state.charBoxes.filter((box) => box.props.id !== arr[1]);
-            // this.state.charBoxes = newList;
-
-            // //get wordBox with same ID from invisibleWord
-            // const invisibleBox =  this.state.invisibleWord.filter((box) => box.props.id === arr[1]);
-            // //add invisible to wordBoxes
-            // this.state.wordBoxes.push(invisibleBox);
-            // //remove from invisible
-            // const newList2 = this.state.invisibleWord.filter((box) => box.props.id !== arr[1]);
-            // this.state.invisibleWord = newList2;
-
-            // this.setState({char: arr[0]}); //sets char, for debugging
-            // this.state.wordChars.push(arr[0]); //this is also for debugging
-            // //alert(this.state.wordChars);
     }
     removeWordChar = (arr) => {
             this.state.charListIds.push(arr[1]);
 
             this.setState({wordListIds: this.state.wordListIds.filter((id) =>  id !== arr[1])})
-            // //get the wordBox that was clicke
-            
-            // const clicked = this.state.wordBoxes.filter((box) => box.props.id === arr[1]);
-            // this.state.invisibleWord.push(clicked);
-
-            // //get rid of box that was clicked from wordList
-            // const newList = this.state.wordBoxes.filter((box) => box.props.id !== arr[1]);
-            // this.state.wordBoxes = newList;
-
-            // //get CharBox with same ID from invisibleChar
-            // const invisibleCharBox = this.state.invisibleChar.filter((box) => box.props.id === arr[1]);
-            // //move from invisible to CharBoxes
-            // this.state.charBoxes.push(invisibleCharBox);
-
-
-            // //this.setState({char: arr[0]}); //sets char, for debugging
-            // this.setState({char: arr[0]});//this is the key to updating the boxes
-            // this.state.wordChars.push(arr[0]); //this is also for debugging
     }
     //
     render() { 
-        const charListBoxes = this.renderBoxes(this.state.charListIds, 0); //render boxes from ID
+        //constsruct boxes to render
+        const charListBoxes = this.renderBoxes(this.state.charListIds, 0); 
         const wordListBoxes = this.renderBoxes(this.state.wordListIds, 1);
         return ( 
             
