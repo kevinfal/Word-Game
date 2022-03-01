@@ -11,6 +11,8 @@ class CharBox extends Component {
             );
     };
     render() { 
+        console.log("rendering charbox: ");
+        console.log(this.props.char);
         return (
         <div>
              <div className = "rectangle" onClick = {this.handleClick}>

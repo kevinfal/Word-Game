@@ -23,7 +23,10 @@ class GameWindow extends Component {
         //replace later
         this.setState({keys: this.makeCharKeys()});
     }
-
+    componentDidMount(){
+        console.log("mounting gameWindow");
+        console.log(this.props.charList);
+    }
     /**
      * init charListIds and state IDs
      */
