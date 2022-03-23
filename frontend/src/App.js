@@ -43,18 +43,42 @@ class App extends Component {
       
     }
     console.log("expected:");
-    console.log(returned);
-    console.log("huh");
     console.log([ "的", "一", "是", "不", "了", "在", "人", "有", "我", "他" ]);
+    console.log("returned");
+    console.log(returned);
     return returned;
   }
+  makeIds(charlist){
+      var ids = {};
+      for(var i = 0; i < charlist.length; i++){
+          ids[i] = charlist[i];
+      }
+      return ids;
+  }
+  /**
+   * proces array of n random numbers
+   * @param {int} n - how many numbers to produce
+   */
+  randomNums(n){
+
+  }
+
   render() {
-    console.log(this.state.characters);
-    const charlist =this.generateCharList()
+    const chars = this.state.characters;
+    console.log(chars);
+    const charlist = [];
+    const numbers = [0,1,2,3,4,5,6,7,8,9,10]
+    for(var i = 0 ; i < numbers.length; i++){
+      charlist.push(chars[numbers[i]]);
+    }
+    var ids = this.makeIds(charlist);
+
     return (
       <div>
         <GameWindow 
-        charList = {charlist}/> 
+        charList = {charlist}
+        numChars = {charlist.length}
+        ids = {ids}/> 
       </div>
 );
   }

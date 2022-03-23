@@ -11,28 +11,23 @@ class GameWindow extends Component {
         this.addWordChar = this.addWordChar.bind(this);
         this.makeIds = this.makeIds.bind(this);
         this.state = { 
-            charsAmt: 3, //change later
-            ids: {}, //dict for id #: char
-            charListIds: [],
+            //ids: {}, //dict for id #: char
+            charListIds: [],//
             wordListIds: [],
-            chars: this.props.charList, //list of chars to use from parent
+            //chars: [props.charList], //list of chars to use from parent
             keys: [], //key for each char, counts up to length
         };
-        //todo: getchars from some list
-        this.makeIds();
-        //replace later
-        this.setState({keys: this.makeCharKeys()});
+
     }
     componentDidMount(){
-        console.log("mounting gameWindow");
-        console.log(this.props.charList);
+        this.makeIds();
+        this.setState({keys: this.makeCharKeys()});
     }
     /**
      * init charListIds and state IDs
      */
     makeIds(){
-        for(var i = 0; i < this.state.chars.length; i++){
-            this.state.ids[i] = this.state.chars[i];
+        for(var i = 0; i < this.props.charList.length; i++){
             this.state.charListIds.push(i);
         }
     }
@@ -49,7 +44,7 @@ class GameWindow extends Component {
             
             listItems.push(
                 <CharBox
-                char = {this.state.ids[arr[i]]}
+                char = {this.props.ids[arr[i]]}
                 key = {arr[i]}
                 id = {arr[i]}
                 
@@ -67,7 +62,7 @@ class GameWindow extends Component {
      */
     makeCharKeys(){
         const returned = [];
-        for(var i = 0; i <this.state.chars.length; i++){
+        for(var i = 0; i <this.props.charList.length; i++){
             returned.push(i);
         }
         return returned;
@@ -82,7 +77,6 @@ class GameWindow extends Component {
     }
     removeWordChar = (arr) => {
             this.state.charListIds.push(arr[1]);
-
             this.setState({wordListIds: this.state.wordListIds.filter((id) =>  id !== arr[1])})
     }
     //
